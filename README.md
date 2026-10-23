@@ -9,11 +9,11 @@
 
 **请到 [Releases](https://github.com/zhirui0322/qiandao/releases) 页面下载**（仓库本身不存放二进制文件，保持轻量）。
 
-最新版本：**[v1.0 — ZUFE_AutoLiveSign_免安装完整版.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.0/ZUFE_AutoLiveSign_免安装完整版.zip)**
+最新版本：**[v1.0 — ZUFE_AutoLiveSign_v1.0.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.0/ZUFE_AutoLiveSign_v1.0.zip)**
 
 | 项目 | 说明 |
 | :--- | :--- |
-| 文件 | `ZUFE_AutoLiveSign_免安装完整版.zip`（约 53 MB，解压后约 147 MB） |
+| 文件 | `ZUFE_AutoLiveSign_v1.0.zip`（约 53 MB，解压后约 147 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
 | 解压密码 | **`yezizi`** |
 | 加密方式 | AES-256 |
 | 运行环境 | 已内置 Python 3.13 + Node.js，**无需另装任何环境** |
