@@ -9,14 +9,25 @@
 
 **请到 [Releases](https://github.com/zhirui0322/qiandao/releases) 页面下载**（仓库本身不存放二进制文件，保持轻量）。
 
-最新版本：**[v1.0 — ZUFE_AutoLiveSign_v1.0.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.0/ZUFE_AutoLiveSign_v1.0.zip)**
+最新版本：**[v1.1 — ZUFE_AutoLiveSign_v1.1.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.1/ZUFE_AutoLiveSign_v1.1.zip)**
 
 | 项目 | 说明 |
 | :--- | :--- |
-| 文件 | `ZUFE_AutoLiveSign_v1.0.zip`（约 53 MB，解压后约 147 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
+| 文件 | `ZUFE_AutoLiveSign_v1.1.zip`（约 53 MB，解压后约 147 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
 | 解压密码 | **`yezizi`** |
 | 加密方式 | AES-256 |
 | 运行环境 | 已内置 Python 3.13 + Node.js，**无需另装任何环境** |
+
+> 历史版本：`v1.0` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+
+### 🆕 v1.1 修复了什么
+
+| 现象 | 原因 | 现在 |
+| :--- | :--- | :--- |
+| 点【开始监听】像没反应 | 直播间当时没开播/没语音转写，界面又没任何提示 | 每分钟心跳：`监听中：还没收到任何字幕…`／`已收到 N 条字幕，最后一条 HH:MM:SS`；重复点击会提示“已在监听中” |
+| 登录要授权好几次、点很多按钮 | 旧检测只看 localStorage，判断不准，且失效时不会自动续期 | 改用平台真实接口 `/api/userinfo` 判定；过期时用统一身份认证**自动静默续期（0 点击）**，确需扫码才弹窗，扫完自动回到签到页 |
+| 提示“请开启精准定位” | 未授权定位，每次弹框；后台标签页定位回调被节流 | 打开签到页自动授予定位权限；真实定位拿不到时用校区坐标兜底（可用 `geo_lat`/`geo_lng`/`geo_accuracy` 覆盖） |
+
 
 > 命令行下载：
 > ```bash
