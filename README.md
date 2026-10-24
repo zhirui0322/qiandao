@@ -9,16 +9,21 @@
 
 **请到 [Releases](https://github.com/zhirui0322/qiandao/releases) 页面下载**（仓库本身不存放二进制文件，保持轻量）。
 
-最新版本：**[v1.3 — ZUFE_AutoLiveSign_v1.3.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.3/ZUFE_AutoLiveSign_v1.3.zip)**
+最新版本：**[v1.4 — ZUFE_AutoLiveSign_v1.4.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.4/ZUFE_AutoLiveSign_v1.4.zip)**
 
 | 项目 | 说明 |
 | :--- | :--- |
-| 文件 | `ZUFE_AutoLiveSign_v1.3.zip`（约 52 MB，解压后约 150 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
+| 文件 | `ZUFE_AutoLiveSign_v1.4.zip`（约 52 MB，解压后约 150 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
 | 解压密码 | **`yezizi`** |
 | 加密方式 | AES-256 |
 | 运行环境 | 已内置 Python 3.13 + Node.js，**无需另装任何环境** |
 
-> 历史版本：`v1.0` / `v1.1` / `v1.2` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+> 历史版本：`v1.0` ~ `v1.3` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+
+### 🆕 v1.4 更新
+
+- **修复使用引导缺翻页按钮**：正文先占位、按钮最后 pack，窗口不够高时「下一步/上一步/跳过」被裁到可视区外；现改为**按钮先钉底部**，正文占剩余空间（820×600 / 700×420 / 1200×800 三档实测可见），并支持 **回车=下一步、Esc=关闭**
+- **新增 6 间教室链接**：A404、B306、B105、D205、C402 新增，D206 由空补齐，`rooms.json` 现共 15 间，逐个实测登录与解析通过
 
 ### 🆕 v1.3 更新
 
@@ -58,7 +63,7 @@
 
 > 命令行下载：
 > ```bash
-> gh release download v1.3 -R zhirui0322/qiandao
+> gh release download v1.4 -R zhirui0322/qiandao
 > ```
 
 ---
