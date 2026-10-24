@@ -9,16 +9,36 @@
 
 **请到 [Releases](https://github.com/zhirui0322/qiandao/releases) 页面下载**（仓库本身不存放二进制文件，保持轻量）。
 
-最新版本：**[v1.2 — ZUFE_AutoLiveSign_v1.2.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.2/ZUFE_AutoLiveSign_v1.2.zip)**
+最新版本：**[v1.3 — ZUFE_AutoLiveSign_v1.3.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.3/ZUFE_AutoLiveSign_v1.3.zip)**
 
 | 项目 | 说明 |
 | :--- | :--- |
-| 文件 | `ZUFE_AutoLiveSign_v1.2.zip`（约 53 MB，解压后约 147 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
+| 文件 | `ZUFE_AutoLiveSign_v1.3.zip`（约 52 MB，解压后约 150 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
 | 解压密码 | **`yezizi`** |
 | 加密方式 | AES-256 |
 | 运行环境 | 已内置 Python 3.13 + Node.js，**无需另装任何环境** |
 
-> 历史版本：`v1.0` / `v1.1` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+> 历史版本：`v1.0` / `v1.1` / `v1.2` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+
+### 🆕 v1.3 更新
+
+**📥 一键导入课表** —— 主界面 / 课表管理都有按钮，粘贴即可：
+
+```
+周一 3-5 9107 软件项目管理
+周二,第7-8节,B308,操作系统
+周三 09:55-12:20 9107 软件项目管理
+周四 12-13 A104 高效能沟通 https://psp-zelda.chaoxing.com/vri-zelda/mobile_live?speechid=...
+```
+
+- 逗号 / 制表符 / 空格分隔都能识别；星期支持 `周一/星期一/1~7`
+- 节次 `3-5`、`第7-8节` 自动换算浙财标准作息，也可直接写 `09:55-12:20`
+- 最后一列填直播间链接，会顺手补进「教室 ↔ 链接」
+- 支持导入 `.txt / .csv / .json`；导入前有预览与缺链接提醒，重复课自动跳过
+
+**❓ 可视化使用引导** —— 首次启动自动弹六步向导（认识功能 → 登录 → 导课表 → 配教室链接 → 怎么启动 → 常见问题），每步带一键按钮；看完记一笔，之后可从主界面【❓ 使用引导】重看。
+
+**🔧 同时修复** —— 认证检查移到后台线程（不再卡界面）；CDP 全链路加超时（WebSocket 10s / 单指令 15s / fetch 4s）+ 桥接 35s 总闸；Edge 开不出来时给明确中文提示。
 
 ### 🆕 v1.2 更新
 
@@ -38,7 +58,7 @@
 
 > 命令行下载：
 > ```bash
-> gh release download v1.2 -R zhirui0322/qiandao
+> gh release download v1.3 -R zhirui0322/qiandao
 > ```
 
 ---
