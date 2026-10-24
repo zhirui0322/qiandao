@@ -1,4 +1,4 @@
-# 浙财大智慧教室直播字幕采集与课堂自动签到系统
+﻿# 浙财大智慧教室直播字幕采集与课堂自动签到系统
 
 > 面向浙江财经大学（ZUFE）智慧教室场景：**超星直播间实时字幕抓取** + **浙财课堂端 Edge 后台静默自动签到**。
 > 作者：**yezizi** ｜ 仅供学习交流，禁止冒充自制与任何形式的商业转售。
@@ -9,16 +9,23 @@
 
 **请到 [Releases](https://github.com/zhirui0322/qiandao/releases) 页面下载**（仓库本身不存放二进制文件，保持轻量）。
 
-最新版本：**[v1.1 — ZUFE_AutoLiveSign_v1.1.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.1/ZUFE_AutoLiveSign_v1.1.zip)**
+最新版本：**[v1.2 — ZUFE_AutoLiveSign_v1.2.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.2/ZUFE_AutoLiveSign_v1.2.zip)**
 
 | 项目 | 说明 |
 | :--- | :--- |
-| 文件 | `ZUFE_AutoLiveSign_v1.1.zip`（约 53 MB，解压后约 147 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
+| 文件 | `ZUFE_AutoLiveSign_v1.2.zip`（约 53 MB，解压后约 147 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
 | 解压密码 | **`yezizi`** |
 | 加密方式 | AES-256 |
 | 运行环境 | 已内置 Python 3.13 + Node.js，**无需另装任何环境** |
 
-> 历史版本：`v1.0` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+> 历史版本：`v1.0` / `v1.1` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+
+### 🆕 v1.2 更新
+
+| 变化 | 说明 |
+| :--- | :--- |
+| 字幕单独一栏 | 窗口上方新增「📺 实时字幕」大字号栏，只滚课堂字幕（`时间 [课程名]` 前缀）；下方「🧾 运行日志」只放状态、心跳与签到结果，互不干扰；另加「🧹 清空字幕」 |
+| 旧式链接同样可用 | 实测 `vri-zelda/index?speechid=…&enc=…`（旧式）与 `vri-zelda/mobile_live?…`（新式）解析出的 `args`、`main` 字幕源与 `live-ts` 接口完全一致，都能取字幕；`rooms.json` 已补 B310 |
 
 ### 🆕 v1.1 修复了什么
 
@@ -31,7 +38,7 @@
 
 > 命令行下载：
 > ```bash
-> gh release download v1.0 -R zhirui0322/qiandao
+> gh release download v1.2 -R zhirui0322/qiandao
 > ```
 
 ---
