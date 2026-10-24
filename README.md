@@ -9,16 +9,22 @@
 
 **请到 [Releases](https://github.com/zhirui0322/qiandao/releases) 页面下载**（仓库本身不存放二进制文件，保持轻量）。
 
-最新版本：**[v1.4 — ZUFE_AutoLiveSign_v1.4.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.4/ZUFE_AutoLiveSign_v1.4.zip)**
+最新版本：**[v1.5 — ZUFE_AutoLiveSign_v1.5.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.5/ZUFE_AutoLiveSign_v1.5.zip)**
 
 | 项目 | 说明 |
 | :--- | :--- |
-| 文件 | `ZUFE_AutoLiveSign_v1.4.zip`（约 52 MB，解压后约 150 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
+| 文件 | `ZUFE_AutoLiveSign_v1.5.zip`（约 52 MB，解压后约 150 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
 | 解压密码 | **`yezizi`** |
 | 加密方式 | AES-256 |
 | 运行环境 | 已内置 Python 3.13 + Node.js，**无需另装任何环境** |
 
-> 历史版本：`v1.0` ~ `v1.3` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+> 历史版本：`v1.0` ~ `v1.4` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+
+### 🆕 v1.5 更新
+
+- **引导新增一步「让 AI 把课表截图转成可导入文字」**：点【📋 复制提示词】→ 把课表截图/PDF 丢给任意能识图的 AI（豆包 / 通义 / Kimi / ChatGPT）→ 它按固定格式返回 `星期 节次 教室 课程名` → 粘回【📥 一键导入课表】即可；导入窗口工具栏也放了同一个按钮
+- 引导现在共 **7 步**：认识功能 → 登录 → 导课表 → AI 转课表 → 配教室链接 → 怎么启动 → 常见问题
+- 引导底部按钮改为先钉窗口底部（窗口再矮也不会消失），支持 **回车=下一步、Esc=关闭**
 
 ### 🆕 v1.4 更新
 
@@ -63,7 +69,7 @@
 
 > 命令行下载：
 > ```bash
-> gh release download v1.4 -R zhirui0322/qiandao
+> gh release download v1.5 -R zhirui0322/qiandao
 > ```
 
 ---
