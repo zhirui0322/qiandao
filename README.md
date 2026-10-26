@@ -1,4 +1,4 @@
-﻿# 浙财大智慧教室直播字幕采集与课堂自动签到系统
+# 浙财大智慧教室直播字幕采集与课堂自动签到系统
 
 > 面向浙江财经大学（ZUFE）智慧教室场景：**超星直播间实时字幕抓取** + **浙财课堂端 Edge 后台静默自动签到**。
 > 作者：**yezizi** ｜ 仅供学习交流，禁止冒充自制与任何形式的商业转售。
@@ -9,16 +9,26 @@
 
 **请到 [Releases](https://github.com/zhirui0322/qiandao/releases) 页面下载**（仓库本身不存放二进制文件，保持轻量）。
 
-最新版本：**[v1.5 — ZUFE_AutoLiveSign_v1.5.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.5/ZUFE_AutoLiveSign_v1.5.zip)**
+最新版本：**[v1.7 — ZUFE_AutoLiveSign_v1.7.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.7/ZUFE_AutoLiveSign_v1.7.zip)**
 
 | 项目 | 说明 |
 | :--- | :--- |
-| 文件 | `ZUFE_AutoLiveSign_v1.5.zip`（约 52 MB，解压后约 150 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
-| 解压密码 | **`yezizi`** |
-| 加密方式 | AES-256 |
-| 运行环境 | 已内置 Python 3.13 + Node.js，**无需另装任何环境** |
+| 文件 | `ZUFE_AutoLiveSign_v1.7.zip`（约 49 MB，解压后约 141 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
+| 解压密码 | 无（v1.7 起不再加密，解压即用） |
+| 运行环境 | 已内置 Python 3.13 + Node.js 24，**无需另装任何环境** |
 
-> 历史版本：`v1.0` ~ `v1.4` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+> 历史版本：`v1.0` ~ `v1.5` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+
+### 🆕 v1.7 更新
+
+| 变化 | 说明 |
+| :--- | :--- |
+| 🩺 字幕停滞自愈 | 超星 `live-ts` 在签名直播地址过期或服务端重启会话后会**一直返回 200 + 空数组**，不报错也不来新字幕（10-26 那节课从 10:11 一路空转到 12:30 就是这情况）。现在只要 **2 分钟**没有新字幕就自动重建直播间会话；再 2 分钟仍空白则清掉本地游标、从当前直播窗口重新同步（已收字幕按 id 去重，不会重复记录或重复签到） |
+| 📝 签到输入流水 | 新增 `logs/签到输入记录.log`：**每次真正把四位数字打进签到页**都会追加一行，含时间、教室、speechId、验证码、浏览器耗时 |
+| 📍 定位自检 | 主界面新增【📍 定位自检】；打开签到页时自动打印「浏览器定位权限 / 坐标来源（真实 or 覆盖）/ 页面 valided 是否已认可」。真实定位拿不到时会提示去开 Windows 定位服务 |
+| 📧 邮件通知默认关闭 | `userdata/timetable.json` 的 `email.to` 置空后不再创建 Mailer、不再调用 `agently-cli`，日志也不会再出现「邮件发 XXXX」。需要提醒时把邮箱填回 `to` 即可 |
+| 🔎 措辞与心跳 | 延迟行由「平板输入」改为「浏览器输入」（签到从来都是走 Edge，旧文案有误导）；心跳行加上「已安静 N 秒」，一眼看出字幕是否还在流动 |
+| 🏷️ 版本号 | 窗口标题不再写死 v1.0，启动首屏打印「版本 / 签到引擎 / 程序目录」，便于确认跑的是哪一份 |
 
 ### 🆕 v1.5 更新
 
@@ -69,7 +79,7 @@
 
 > 命令行下载：
 > ```bash
-> gh release download v1.5 -R zhirui0322/qiandao
+> gh release download v1.7 -R zhirui0322/qiandao
 > ```
 
 ---
