@@ -9,15 +9,27 @@
 
 **请到 [Releases](https://github.com/zhirui0322/qiandao/releases) 页面下载**（仓库本身不存放二进制文件，保持轻量）。
 
-最新版本：**[v1.8 — ZUFE_AutoLiveSign_v1.8.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.8/ZUFE_AutoLiveSign_v1.8.zip)**
+最新版本：**[v1.9 — ZUFE_AutoLiveSign_v1.9.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.9/ZUFE_AutoLiveSign_v1.9.zip)**
 
 | 项目 | 说明 |
 | :--- | :--- |
-| 文件 | `ZUFE_AutoLiveSign_v1.8.zip`（约 49 MB，解压后约 139 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
+| 文件 | `ZUFE_AutoLiveSign_v1.9.zip`（约 49 MB，解压后约 139 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
 | 解压密码 | 无（v1.7 起不再加密，解压即用） |
 | 运行环境 | 已内置 Python 3.13 + Node.js 24，**无需另装任何环境** |
 
-> 历史版本：`v1.0` ~ `v1.7` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+> 历史版本：`v1.0` ~ `v1.8` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+
+### 🆕 v1.9 更新
+
+| 变化 | 说明 |
+| :--- | :--- |
+| 📱 平板通道回归 | 送码时**同时**走浏览器（Edge/CDP）与平板（ADB）。任意一条签上即成功；平板没连上会自动跳过。想关掉平板：`userdata/settings.json` 加 `"tablet_submit": false` |
+| 🖥️ 签到页只开一次 | 程序启动后打开「上课啦」签到页，之后一直留着，不再每节课新开、也不再关闭重开 |
+| 👀 不再静默 | 签到页直接显示在屏幕上（打开时带到前台） |
+| 🔄 45 分钟只刷新 | 保活改成刷新当前页面，不再「关掉重开」，页面身份/登录态/定位都保留 |
+| 🔐 未认证写日志 | 开场与每次刷新都复查登录态，未认证会写进 `weekly.log` 与界面日志，并弹窗提醒 |
+| 🧾 日志带通道 | `logs/签到输入记录.log` 结论行标注「通道 浏览器+平板」/「通道 浏览器」 |
+
 
 ### 🆕 v1.8 更新
 
