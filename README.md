@@ -9,15 +9,26 @@
 
 **请到 [Releases](https://github.com/zhirui0322/qiandao/releases) 页面下载**（仓库本身不存放二进制文件，保持轻量）。
 
-最新版本：**[v1.7 — ZUFE_AutoLiveSign_v1.7.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.7/ZUFE_AutoLiveSign_v1.7.zip)**
+最新版本：**[v1.8 — ZUFE_AutoLiveSign_v1.8.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.8/ZUFE_AutoLiveSign_v1.8.zip)**
 
 | 项目 | 说明 |
 | :--- | :--- |
-| 文件 | `ZUFE_AutoLiveSign_v1.7.zip`（约 49 MB，解压后约 141 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
+| 文件 | `ZUFE_AutoLiveSign_v1.8.zip`（约 49 MB，解压后约 139 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
 | 解压密码 | 无（v1.7 起不再加密，解压即用） |
 | 运行环境 | 已内置 Python 3.13 + Node.js 24，**无需另装任何环境** |
 
-> 历史版本：`v1.0` ~ `v1.5` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+> 历史版本：`v1.0` ~ `v1.7` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+
+### 🆕 v1.8 更新
+
+| 修复 | 说明 |
+| :--- | :--- |
+| 🔐 登录态误判 | 之前只看 `HTTP 200` 就算“已登录”，但会话失效后页面会跳到 `cas.zufe.edu.cn`，那里同样返回 200，于是被误判成登录有效、一路把码打进一个没登录的页面。现在必须 origin 是 `skl.zufe.edu.cn` 且解析出用户信息才算登录 |
+| 🔁 打开签到页自动续期 | 开场打开签到页时若发现登录失效，会先用统一身份认证静默续期；续不上才提示人工登录。之后每 45 分钟复查一次，未登录会明确告警 |
+| 📍 重开后「请开启定位!」 | 程序用的 CDP 定位覆盖只对当前连接有效，命令行一退出就失效；签到页重开后坐标变成 0，页面只弹「请开启定位!」而**根本不发签到请求**。现在改为在页面里钉住定位（`navigator.geolocation` shim），并在打字前主动触发一次定位、等坐标落位再输入 |
+| ⏳ `doing` 卡死 | 页面 `mySignIn()` 首行是 `if (this.doing) return;`，一次异常后该标志不会复位，之后输满四位毫无反应。现在打字前会复位它 |
+| 🧾 记录真实请求与响应 | `logs/签到输入记录.log` 现在会记下**该次签到的完整请求 URL 和服务器响应体**；若压根没发出请求，也会注明（多半是被定位或 doing 拦住） |
+| 🔎 失败定性 | 平台连“码不存在”都回 401，和“未登录”的 401 混在一起。失败后会再探一次登录态，明确区分「登录失效」与「码被判定无效」 |
 
 ### 🆕 v1.7 更新
 
