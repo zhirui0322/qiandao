@@ -1,0 +1,5 @@
+qr_hits/
+config.json
+rooms.json
+__pycache__/
+*.pyc
