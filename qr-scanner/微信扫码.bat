@@ -20,7 +20,7 @@ if not "%~1"=="" goto run
 echo Scanning today's classroom, ppt and camera.
 echo Press Ctrl+C to stop.
 echo.
-%PY% scan_qr.py --channels ppt,main --interval 2 --timeout 1800 --copy
+%PY% scan_qr.py --channels ppt,main --interval 2 --timeout 1800 --copy --show
 goto done
 
 :run

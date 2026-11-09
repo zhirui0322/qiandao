@@ -94,8 +94,8 @@ class Scanner:
             pass
         return image
 
-    def decode(self, image):
-        """多策略识别：原图 → 放大 2 倍 → 灰度自适应二值化。"""
+    def detect(self, image):
+        """多策略识别：原图 → 放大 2 倍 → 灰度自适应二值化。返回 [(文本, 四角坐标)]。"""
         if image is None:
             return []
         candidates = [image]
@@ -108,22 +108,49 @@ class Scanner:
 
         found = []
         for candidate in candidates:
+            scale = candidate.shape[1] / max(image.shape[1], 1)
             try:
-                ok, texts, _points, _ = self.detector.detectAndDecodeMulti(candidate)
+                ok, texts, points, _ = self.detector.detectAndDecodeMulti(candidate)
             except Exception:
-                ok, texts = False, []
-            if ok:
-                found.extend(text.strip() for text in texts or [] if text and text.strip())
+                ok, texts, points = False, [], None
+            if ok and texts:
+                for index, text in enumerate(texts):
+                    if text and text.strip():
+                        quad = points[index] / scale if points is not None else None
+                        found.append((text.strip(), quad))
             if not found:
                 try:
-                    text, _points, _ = self.detector.detectAndDecode(candidate)
+                    text, quad, _ = self.detector.detectAndDecode(candidate)
                 except Exception:
-                    text = ''
+                    text, quad = '', None
                 if text and text.strip():
-                    found.append(text.strip())
+                    found.append((text.strip(), quad / scale if quad is not None else None))
             if found:
                 break
-        return list(dict.fromkeys(found))
+        return found
+
+    def decode(self, image):
+        return list(dict.fromkeys(text for text, _ in self.detect(image)))
+
+
+def crop_qr(image, quad, margin=0.12):
+    """按二维码四角坐标裁一块，四周留白。"""
+    if image is None:
+        return None
+    if quad is None:
+        return image
+    points = np.array(quad, dtype=float).reshape(-1, 2)
+    xs, ys = points[:, 0], points[:, 1]
+    x1, x2 = int(xs.min()), int(xs.max())
+    y1, y2 = int(ys.min()), int(ys.max())
+    pad_x = int((x2 - x1) * margin) + 6
+    pad_y = int((y2 - y1) * margin) + 6
+    height, width = image.shape[:2]
+    x1, y1 = max(0, x1 - pad_x), max(0, y1 - pad_y)
+    x2, y2 = min(width, x2 + pad_x), min(height, y2 + pad_y)
+    if x2 - x1 < 40 or y2 - y1 < 40:
+        return image
+    return image[y1:y2, x1:x2]
 
 
 def save_hit(image, texts, save_dir):
@@ -154,6 +181,8 @@ def main(argv=None):
     parser.add_argument('--once', action='store_true', help='只抓一次')
     parser.add_argument('--open', action='store_true', help='识别到链接就用默认浏览器打开')
     parser.add_argument('--copy', action='store_true', help='把结果复制到剪贴板')
+    parser.add_argument('--show', action='store_true', help='把二维码放大置顶显示，用手机微信扫一扫')
+    parser.add_argument('--show-seconds', type=int, default=0, help='放大窗口自动关闭秒数，0 = 手动关')
     parser.add_argument('--user', help='超星账号（需要登录的链接才用）')
     parser.add_argument('--password', help='超星密码')
     parser.add_argument('--stream', help='调试用：直接给视频流或本地文件')
@@ -207,10 +236,11 @@ def main(argv=None):
         image = scanner.grab(channel)
         if image is None and channel != 'main':
             image = scanner.grab('main')
-        texts = scanner.decode(image)
+        found = scanner.detect(image)
         stamp = datetime.now().strftime('%H:%M:%S')
 
-        if texts:
+        if found:
+            texts = [text for text, _ in found]
             for text in texts:
                 print(f'[{stamp}] [OK] 识别到二维码：{text}', flush=True)
             image_path, text_path = save_hit(image, texts, save_dir)
@@ -236,6 +266,16 @@ def main(argv=None):
             print('已复制到剪贴板。', flush=True)
         except Exception:
             pass
+    if args.show:
+        crop = crop_qr(image, found[0][1])
+        if crop is not None:
+            save_dir.mkdir(parents=True, exist_ok=True)
+            crop_path = save_dir / f'qr_crop_{datetime.now().strftime("%m%d_%H%M%S")}.png'
+            cv2.imwrite(str(crop_path), crop)
+            print(f'           放大图：{crop_path}', flush=True)
+            print('  → 手机微信「扫一扫」屏幕上的这个二维码', flush=True)
+            from qr_display import show
+            show(crop, result, seconds=args.show_seconds)
     if args.open and result.lower().startswith(('http://', 'https://')):
         subprocess.run(['powershell', '-NoProfile', '-Command', 'Start-Process $args[0]', result])
     print('\n扫码结果：' + result, flush=True)
