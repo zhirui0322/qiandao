@@ -9,15 +9,32 @@
 
 **请到 [Releases](https://github.com/zhirui0322/qiandao/releases) 页面下载**（仓库本身不存放二进制文件，保持轻量）。
 
-最新版本：**[v1.9 — ZUFE_AutoLiveSign_v1.9.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.9/ZUFE_AutoLiveSign_v1.9.zip)**
+最新版本：**[v1.11 — ZUFE_AutoLiveSign_v1.11.zip](https://github.com/zhirui0322/qiandao/releases/download/v1.11/ZUFE_AutoLiveSign_v1.11.zip)**
 
 | 项目 | 说明 |
 | :--- | :--- |
-| 文件 | `ZUFE_AutoLiveSign_v1.9.zip`（约 49 MB，解压后约 139 MB，内含 `ZUFE_AutoLiveSign\` 目录） |
+| 文件 | `ZUFE_AutoLiveSign_v1.11.zip`（约 0.1 MB，纯源码，解压后是 `ZUFE_AutoLiveSign\` 目录） |
 | 解压密码 | 无（v1.7 起不再加密，解压即用） |
-| 运行环境 | 已内置 Python 3.13 + Node.js 24，**无需另装任何环境** |
+| 运行环境 | 需要自备 **Python 3.9+** 和 **ffmpeg**（v1.11 起不再内置运行时，包体积从 49 MB 降到 0.1 MB） |
 
-> 历史版本：`v1.0` ~ `v1.8` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+首次运行先装依赖：
+
+```bash
+pip install -r requirements.txt
+winget install Gyan.FFmpeg
+```
+
+> 历史版本：`v1.0` ~ `v1.10` 见 [Releases](https://github.com/zhirui0322/qiandao/releases)。
+
+### 🆕 v1.11 更新
+
+| 修复 | 说明 |
+| :--- | :--- |
+| 🛠️ 绝对路径 | v1.10 打包时把作者本机的路径打了进去，换台机器直接跑不起来。现在全部改成相对路径 |
+| 📦 依赖清单 | 新增 `requirements.txt`（`requests` / `pycryptodome`），解决「本地没有对应依赖」的报错 |
+| 🎬 直播重写 | 旧版会同时开两路窗口、还常驻后台判断有没有课。现在点一次只弹一个播放窗口，关掉即结束 |
+| 🆕 看直播 | 新增 `看直播.bat`：按课表打开当前这节课的画面（ffplay 直连，有声音、延迟约 1 秒） |
+| 🔗 链接规范化 | `rooms.json` 统一成 `mobile_live` 写法，发布包内已去掉个人 pid |
 
 ### 🆕 v1.9 更新
 
