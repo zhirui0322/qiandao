@@ -1,0 +1,7 @@
+﻿# Python 依赖（.py 里只用到这两个，其余都是标准库）
+requests>=2.31,<3
+pycryptodome>=3.19,<4
+
+# 非 pip 依赖：ffmpeg / ffplay 必须在 PATH 里
+#   winget install Gyan.FFmpeg
+#   验证：ffmpeg -version

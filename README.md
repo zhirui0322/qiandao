@@ -146,6 +146,25 @@ python scan_qr.py --room 9107 --show
 
 装法、参数和实现原理见 **[qr-scanner/README.md](./qr-scanner/README.md)**。
 
+另有一个 **[watch-live](./watch-live)**：点一下弹出一个播放窗口，直接看当前这节课的教室实况（超星页面播放源缺失时也能看），有声音、延迟 1 秒左右。
+
+---
+
+## 🩹 v1.10 修复说明
+
+| 问题 | 处理 |
+| :--- | :--- |
+| 包内写死了作者本机的绝对路径 | 已全部改为相对路径，换机器不用改任何配置 |
+| 有用户报「本地没有对应依赖」 | 仓库根目录新增 [`requirements.txt`](./requirements.txt)，一条命令装齐 |
+| 直播功能打不开 | 换成 ffplay 直连方案，见 [watch-live](./watch-live) |
+
+依赖只有两个 Python 包（`requests`、`pycryptodome`），外加 `ffmpeg`：
+
+```bash
+pip install -r requirements.txt
+winget install Gyan.FFmpeg
+```
+
 ---
 
 ## 🚀 使用

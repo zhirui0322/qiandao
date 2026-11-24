@@ -1,0 +1,21 @@
+# ZUFE_AutoLiveSign 依赖清单
+# 环境：Python 3.9+（实测 3.13.15）
+# 安装：pip install -r requirements.txt
+
+# 所有网络请求（直播间页面、字幕接口、登录、签到页）
+requests>=2.31,<3
+
+# 超星登录用的 AES 加密（capture_live.py / classroom.py）
+pycryptodome>=3.19,<4
+
+# ---------------------------------------------------------------
+# 非 pip 依赖（需要单独装，且必须在 PATH 里）：
+#
+#   ffmpeg / ffplay  —— watch_live.py（课堂实时直播）用
+#       抓流、转封装、播放都靠它，装法：
+#         winget install Gyan.FFmpeg
+#       验证：ffmpeg -version
+#
+#   其余模块（签到、课表、界面、ADB 平板通道）只用标准库，
+#   tkinter 随 Python 自带；ADB 属于可选通道，没装会自动跳过。
+# ---------------------------------------------------------------

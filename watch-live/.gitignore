@@ -1,0 +1,4 @@
+﻿userdata/
+logs/
+*.log
+__pycache__/
